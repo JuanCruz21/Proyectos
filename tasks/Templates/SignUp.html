@@ -1,5 +1,8 @@
-<h1>SignUp</h1>
+{% extends 'Base.html' %}
 
+{% block contend %}
+<h1>SignUp</h1>
+{{Error}}
 <form method="POST">
     {% csrf_token %}
     {{signup.as_p}}
@@ -7,3 +10,4 @@
         Enviar
     </button>
 </form>
+{% endblock %}
