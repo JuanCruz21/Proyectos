@@ -1,7 +1,14 @@
-a{
+body{
     text-decoration: none;
 }
 
-body{
-    background-color: brown;
+.menu{
+    background-color: chocolate;
+}
+.enlacemenu{
+    text-decoration: none;
+    padding: 1rem;
+}
+.enlacemenu :hover{
+    background-color: azure;
 }
