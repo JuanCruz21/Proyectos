@@ -12,15 +12,21 @@
         <li>
             <a class="enlacemenu" href="/">Home</a>
         </li>
-        <li>
-            <a class="enlacemenu" href="/signup">SignUp</a>
-        </li>
+        {% if user.is_authenticated %}
         <li>
             <a class="enlacemenu" href="/tasks">Tasks</a>
         </li>
         <li>
-            <a href="/login">Login</a>
+            <a class="enlacemenu" href="/logout">LogOut</a>
         </li>
+        {% else %}
+        <li>
+            <a class="enlacemenu" href="/login">Login</a>
+        </li>
+        <li>
+            <a class="enlacemenu" href="/signup">SignUp</a>
+        </li>
+        {% endif %}
     </ul>
 
     {% block contend %}

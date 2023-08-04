@@ -3,12 +3,17 @@ body{
 }
 
 .menu{
+    padding: 1rem;
     background-color: chocolate;
+    display: flex;
+    justify-content: space-between;
 }
 .enlacemenu{
     text-decoration: none;
     padding: 1rem;
+    margin: 1rem;
+    color: aliceblue;
 }
-.enlacemenu :hover{
-    background-color: azure;
+a :hover{
+    background-color: orange;
 }

@@ -1,8 +1,7 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render,redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from django.contrib.auth import login
+from django.contrib.auth import login,logout,authenticate
 from django.db import IntegrityError
 # Create your views here.
 
@@ -22,17 +21,35 @@ def SignUp(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
-                login(request, user) 
+                login(request, user)
                 return render(request, 'tasks.html')
             except IntegrityError:
-                return render(request, 'tasks.html')
+                return render(request, 'SignUp.html', {
+                'signup': UserCreationForm, 'Error': 'Usuario ya existe'
+            })
         else:
             return render(request, 'SignUp.html', {
                 'signup': UserCreationForm, 'Error': 'Las contraseñas no coinciden'
             })
     
-def login(request):
-    return render(request, 'Login.html')
+def log(request):
+    if request.method == 'GET':
+        return render(request, 'Login.html', {
+            'signin': AuthenticationForm
+        })
+    else:
+        user = authenticate(request,username=request.POST['username'],password=request.POST['password'])
+        if user is None:
+            return render(request, 'Login.html', {
+                'signin': AuthenticationForm, 'Error' :'Usuario no existe'
+        })
+        else:
+            login(request, user)
+            return redirect('tasks')
 
 def tasks(request):
     return render(request, 'tasks.html')
+
+def signout(request):
+    logout(request)
+    return redirect('home')

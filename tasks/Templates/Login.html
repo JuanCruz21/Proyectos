@@ -1,5 +1,14 @@
 {% extends 'Base.html' %}
+
 {% block contend %}
-<h1>Login</h1>
-{{Error}}
+<Form method="GET">
+    <h1>Login</h1>
+    <div>
+        {{Error}}
+        {{signin.as_p}}
+        <button>
+            Ingresar
+        </button>
+    </div>
+</Form>
 {% endblock %}
