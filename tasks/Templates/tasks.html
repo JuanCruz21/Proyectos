@@ -5,10 +5,10 @@
     <h1>Tareas</h1>
     {% for task in tasks %}
     <div>
-        {{task.title}}
-        {{task.description}}
-        {{task.important}}
-        {{task.user.username}}
+        <h2>{{task.title}}</h2>
+        <p>{{task.description}}</p>
+        <p>{{task.important}}</p>
+        <p>{{task.user.username}}</p>
     </div>
     
     {% endfor %}
