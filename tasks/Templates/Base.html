@@ -14,6 +14,9 @@
         </li>
         {% if user.is_authenticated %}
         <li>
+            <a class="enlacemenu" href="/NewTask">New Task</a>
+        </li>
+        <li>
             <a class="enlacemenu" href="/tasks">Tasks</a>
         </li>
         <li>
@@ -21,7 +24,7 @@
         </li>
         {% else %}
         <li>
-            <a class="enlacemenu" href="/login">Login</a>
+            <a class="enlacemenu" href="/Signin">Login</a>
         </li>
         <li>
             <a class="enlacemenu" href="/signup">SignUp</a>

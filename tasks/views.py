@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.db import IntegrityError
+from .forms import TaskForm
+from .models import Task
 # Create your views here.
 
 def home(request):
@@ -32,24 +34,38 @@ def SignUp(request):
                 'signup': UserCreationForm, 'Error': 'Las contraseñas no coinciden'
             })
     
-def log(request):
+def Signin(request):
     if request.method == 'GET':
-        return render(request, 'Login.html', {
+        return render(request, 'Signin.html', {
             'signin': AuthenticationForm
         })
     else:
-        user = authenticate(request,username=request.POST['username'],password=request.POST['password'])
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST
+            ['password'])
         if user is None:
-            return render(request, 'Login.html', {
-                'signin': AuthenticationForm, 'Error' :'Usuario no existe'
-        })
+            return render(request, 'Signin.html', {
+                'signin': AuthenticationForm, 
+                'Error' :'Usuario no existe o contraseña incorrecta'
+            })
         else:
             login(request, user)
             return redirect('tasks')
 
 def tasks(request):
-    return render(request, 'tasks.html')
+    Tareas = Task.objects.filter(user=request.user, datecomplete__isnull=True)
+    return render(request, 'tasks.html', {'tasks':Tareas})
 
+def Newtasks(request):
+    if request.method == 'GET':
+        return render(request, 'CreateTask.html', { 'form': TaskForm })
+    else:
+        Newtask = TaskForm(request.POST)
+        new_task = Newtask.save(commit=False)
+        new_task.user = request.user
+        new_task.save()
+        return redirect('tasks')
+    
 def signout(request):
     logout(request)
     return redirect('home')

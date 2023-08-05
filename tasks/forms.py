@@ -1,6 +1,7 @@
 from django import forms
-
-class Signup(forms.Form):
-    name = forms.CharField(max_length=200)
-    email = forms.EmailField()
-    password = forms.PasswordInput()
+from django.forms import ModelForm
+from .models import Task
+class TaskForm(ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'important']
