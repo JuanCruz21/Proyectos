@@ -7,5 +7,6 @@ urlpatterns = [
     path('Signin/', views.Signin, name='Signin'),
     path('logout/', views.signout,name='logout'),
     path('tasks/', views.tasks, name='tasks'),
-    path('NewTask/', views.Newtasks , name='NewTask')
+    path('NewTask/', views.Newtasks , name='NewTask'),
+    path('task/<int:task_id>', views.DetailTask, name='taskdetail')
 ]

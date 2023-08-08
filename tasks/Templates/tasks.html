@@ -4,12 +4,11 @@
 {% block contend %}
     <h1>Tareas</h1>
     {% for task in tasks %}
-    <div>
+    <a href="{% url 'taskdetail' task.id %}" class="tareas">
         <h2>{{task.title}}</h2>
-        <p>{{task.description}}</p>
-        <p>{{task.important}}</p>
-        <p>{{task.user.username}}</p>
-    </div>
-    
+    </a>
+    <p>{{task.description}}</p>
+    <p>{{task.important}}</p>
+    <p>{{task.user.username}}</p>
     {% endfor %}
 {% endblock %}
