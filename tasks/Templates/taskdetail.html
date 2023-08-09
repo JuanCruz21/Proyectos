@@ -4,6 +4,9 @@
   {{form.as_p}}
   {% csrf_token %}
   <button>Update</button>
-  {{Error}}
 </form>
+<form method="POST">
+  <button>Complete</button>
+</form>
+{{Error}}
 {% endblock %}

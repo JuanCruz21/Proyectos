@@ -74,14 +74,17 @@ def DetailTask(request,task_id):
         return render(request, 'taskdetail.html', {'task':task,'form': form})
     else:
         try:
-            task = get_object_or_404(Task,pk=task_id)
+            task = get_object_or_404(Task,pk=task_id, user=request.user)
             form = TaskForm(request.POST,instance=task)
             form.save()
             return redirect('tasks')
         except ValueError:
-            return render(request, 'taskdetail.html', {'task':task,'form': form, 
-                                                       'Error': "No se pudo actualizar"})
+            return render(request, 'taskdetail.html', {'task':task,'form': form,'Error': "No se pudo actualizar"})
 
 def signout(request):
     logout(request)
     return redirect('home')
+
+def TaskComplete(request,task_id):
+    task = get_object_or_404(Task,pk=task_id, user=request.user)
+    return render(request, 'taskcomplete.html',{'task':task})
