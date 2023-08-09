@@ -1,5 +1,9 @@
-{% extends 'Base.html' %}
-
-{% block contend %}
-        <h2>Tarea: {{task.title}}</h2>
+{% extends 'Base.html' %} {% block contend %}
+<h2>Tarea: {{task.title}}</h2>
+<form method="POST">
+  {{form.as_p}}
+  {% csrf_token %}
+  <button>Update</button>
+  {{Error}}
+</form>
 {% endblock %}
