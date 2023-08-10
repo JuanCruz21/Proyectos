@@ -5,8 +5,15 @@
   {% csrf_token %}
   <button>Update</button>
 </form>
-<form method="POST">
+<form action="{% url 'taskcomplete' task.id %}" method="POST">
+  {% csrf_token %}
   <button>Complete</button>
 </form>
+
+<form action="{% url 'taskdelete' task.id %}" method="POST">
+  {% csrf_token %}
+  <button>Delete</button>
+</form>
+
 {{Error}}
 {% endblock %}
