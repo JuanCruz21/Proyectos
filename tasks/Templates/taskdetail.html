@@ -1,19 +1,22 @@
-{% extends 'Base.html' %} {% block contend %}
+{% extends 'Base.html' %} 
+
+{% block contend %}
+<section class="container card-body col-md-4">
 <h2>Tarea: {{task.title}}</h2>
 <form method="POST">
   {{form.as_p}}
   {% csrf_token %}
-  <button>Update</button>
+  <button class="btn btn-success px-5 mt-2">Update</button>
 </form>
 <form action="{% url 'taskcomplete' task.id %}" method="POST">
   {% csrf_token %}
-  <button>Complete</button>
+  <button class="btn btn-primary px-5 mt-2">Complete</button>
 </form>
 
 <form action="{% url 'taskdelete' task.id %}" method="POST">
   {% csrf_token %}
-  <button>Delete</button>
+  <button class="btn btn-danger px-5 mt-2">Delete</button>
 </form>
-
+</section>
 {{Error}}
 {% endblock %}

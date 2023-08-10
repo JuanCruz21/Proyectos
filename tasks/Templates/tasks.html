@@ -2,7 +2,9 @@
 {% extends 'Base.html' %}
 
 {% block contend %}
-    <h1>Tareas</h1>
+<main class=" container">
+<h1>Tareas</h1>
+<section class="card card-body">
     {% for task in tasks %}
     <a href="{% url 'taskdetail' task.id %}" class="tareas">
         <h2>{{task.title}}</h2>
@@ -11,4 +13,6 @@
     <p>{{task.important}}</p>
     <p>{{task.user.username}}</p>
     {% endfor %}
+</section>
+</main>
 {% endblock %}

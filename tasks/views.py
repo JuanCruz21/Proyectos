@@ -6,6 +6,7 @@ from django.db import IntegrityError
 from .forms import TaskForm
 from .models import Task
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
@@ -53,15 +54,18 @@ def Signin(request):
             login(request, user)
             return redirect('tasks')
 
+@login_required
 def tasks(request):
     Tareas = Task.objects.filter(user=request.user, datecomplete__isnull=True)
     return render(request, 'tasks.html', {'tasks':Tareas})
 
+@login_required
 def tasks_complete(request):
     Tareas = Task.objects.filter(user=request.user, 
                 datecomplete__isnull=False).order_by('-datecomplete')
     return render(request, 'tasks.html', {'tasks':Tareas})
 
+@login_required
 def Newtasks(request):
     if request.method == 'GET':
         return render(request, 'CreateTask.html', { 'form': TaskForm })
@@ -71,7 +75,8 @@ def Newtasks(request):
         new_task.user = request.user
         new_task.save()
         return redirect('tasks')
-    
+
+@login_required
 def DetailTask(request,task_id):
     if request.method == 'GET':
         task = get_object_or_404(Task,pk=task_id)
@@ -90,13 +95,15 @@ def signout(request):
     logout(request)
     return redirect('home')
 
+@login_required
 def TaskComplete(request,task_id):
     task = get_object_or_404(Task,pk=task_id, user=request.user)
     if request.method == 'POST':
         task.datecomplete = timezone.now()
         task.save()
         return redirect('taskscomplete')
-    
+
+@login_required
 def TaskDelete(request,task_id):
     task = get_object_or_404(Task,pk=task_id, user=request.user)
     if request.method == 'POST':

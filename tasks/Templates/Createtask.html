@@ -1,13 +1,14 @@
 {% extends 'Base.html' %}
 
 {% block contend %}
-<h1>Crea la tarea</h1>
-
+<h1 class="text-center">Crea la tarea</h1>
+<section class="container card-body col-md-4">
 <form action="/NewTask/" method="POST">
     {% csrf_token %}
-    {{form}}
-    <Button>
+    {{form.as_p}}
+    <Button class="btn btn-primary">
         Guardar
     </Button>
 </form>
+</section>
 {% endblock %}
