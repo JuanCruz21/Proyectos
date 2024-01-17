@@ -25,7 +25,7 @@ git clone https://github.com/JuanCruz21/Proyectos
 ```
 2. Instala las dependencias
 ```bash
-cd Protectos
+cd Proyectos
 pip install -r requirements.txt
 ```
 3. Realiza las migraciones
